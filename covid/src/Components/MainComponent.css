@@ -1,0 +1,19 @@
+.main{
+    display: flex;
+    /* background-color: black; */
+}
+.main > *{
+    flex: 1;
+    text-align: center;
+}
+.main .count{
+    font-size: 46px;
+    font-weight: bold;
+    color: white;
+
+}
+
+.main .heading{
+    color: white;
+    font-size: 32px;
+}
