@@ -24,17 +24,19 @@
   padding: 15px;
   border: 1px solid black;
   margin: 0 5px 0 5px;
+  border-radius: 5px;
+  
 }
 .infected {
   background-color: #f3cccc;
   border-color: #f3cccc;
 }
 .active {
-  background-color: #F0FFF4;
+  background-color: #cff8da;
   border-color: #F0FFF4;
 }
 .recovered {
-  background-color: #EDF2F7;
+  background-color: #d3e6f8;
   border-color: #EDF2F7;
 }
 .deaths {

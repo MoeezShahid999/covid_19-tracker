@@ -38,7 +38,7 @@ class MainComponent extends React.Component {
 
     return (
       <div>
-        <h1 style={{ margin: "0 0 0 20px", fontSize: "48px" }}>
+        <h1 style={{ margin: "0 0 20px 0px", fontSize: "48px" }}>
           {this.props.country}
         </h1>
         <div className="main">

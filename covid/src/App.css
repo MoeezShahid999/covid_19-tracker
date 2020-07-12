@@ -3,8 +3,8 @@
   min-height: 100vh;
 }
 .list-item {
-  padding: 5px;
-  margin: 5px;
+  padding: 2px;
+  margin: 0 0 5px 0;
 }
 .list-count,
 .list-heading {
@@ -20,12 +20,12 @@
   margin: 2px 0 !important;
 }
 .list-item-container:hover {
-  background-color: rgb(53, 46, 46);
+  background-color: rgb(238, 238, 238);
 }
 .App .MuiPaper-root {
-  background-color: black;
+  /* background-color: white; */
   opacity: .9;
-  color: white;
+  /* color: white; */
 }
 .color-flex {
   display: flex;
@@ -40,7 +40,7 @@
 .axis-flex > * {
   flex: 1;
 }
-.MuiInput-underline {
+/* .MuiInput-underline {
   border-bottom:1px solid white !important;
 }
 .MuiInput-underline input{
@@ -48,7 +48,7 @@
 }
 .MuiFormLabel-root {
   color: white !important;
-}
+} */
 
 
 

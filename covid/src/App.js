@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import Button from "@material-ui/core/Button";
 import { TextField } from "@material-ui/core";
-import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import MainComponent from "./Components/MainComponent";
 import ReactCharts from "./Components/ReactCharts";
 import "./App.css";
@@ -89,7 +84,7 @@ export default function PermanentDrawer(props) {
                       <span className="list-heading">Recovered: </span>
                       <span className="list-count">{el.recovered}</span>
                     </div>
-                    <Divider style = {{background:'#484747',margin:'10px 0'}}/>
+                    <Divider style = {{background:'#484747',margin:'1px 0 0 0'}}/>
                   </div>
                 );
               }
