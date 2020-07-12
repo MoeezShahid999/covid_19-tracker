@@ -35,34 +35,37 @@ class MainComponent extends React.Component {
     const { data } = this.props;
     // console.log(this.props.data)
     // console.log(this.state.data);
+
     return (
-      <div className="main">
-        <div className="infected">
-          <div className="count">
-            {data.Global ? data.Global.TotalConfirmed : null}
+      <div>
+        <h1 style={{ margin: "0 0 0 20px", fontSize: "48px" }}>
+          {this.props.country}
+        </h1>
+        <div className="main">
+          <div className="infected">
+            <div className="count">
+              {data.cases || data.cases == 0 ? data.cases : null}
+            </div>
+            <div className="heading">Confirmed</div>
           </div>
-          <div className="heading">Confirmed</div>
-        </div>
-        <div className="active">
-          <div className="count">
-            {data.Global
-              ? data.Global.TotalConfirmed -
-                (data.Global.TotalRecovered + data.Global.TotalDeaths)
-              : null}
+          <div className="active">
+            <div className="count">
+              {data.active || data.active == 0 ? data.active : null}
+            </div>
+            <div className="heading">Active</div>
           </div>
-          <div className="heading">Active</div>
-        </div>
-        <div className="recovered">
-          <div className="count">
-            {data.Global ? data.Global.TotalRecovered : null}
+          <div className="recovered">
+            <div className="count">
+              {data.recovered || data.recovered == 0 ? data.recovered : null}
+            </div>
+            <div className="heading">Recovered</div>
           </div>
-          <div className="heading">Recovered</div>
-        </div>
-        <div className="deaths">
-          <div className="count">
-            {data.Global ? data.Global.TotalDeaths : null}
+          <div className="deaths">
+            <div className="count">
+              {data.deaths || data.deaths == 0 ? data.deaths : null}
+            </div>
+            <div className="heading">Deaths</div>
           </div>
-          <div className="heading">Deaths</div>
         </div>
       </div>
     );

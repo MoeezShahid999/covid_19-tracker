@@ -1,18 +1,47 @@
-.App{
-  background-color: #121212;
+.App {
+  /* background-color: #121212; */
   min-height: 100vh;
 }
-.list-item{
+.list-item {
   padding: 5px;
   margin: 5px;
 }
-.list-count,.list-heading{
+.list-count,
+.list-heading {
   font-weight: 550;
 }
-.list-count{
-  color: grey;
+.list-count {
+  /* color: grey; */
 }
-.App .MuiPaper-root{
-  background-color: #484848;
+.list-item-container {
+  cursor: pointer !important;
+}
+.list-item-container:hover {
+  background-color: rgb(53, 46, 46);
+}
+.App .MuiPaper-root {
+  background-color: black;
+  opacity: .9;
   color: white;
+}
+.color-flex {
+  display: flex;
+}
+.color-flex > * {
+  flex: 1;
+}
+.axis-flex {
+  display: flex;
+}
+.axis-flex > * {
+  flex: 1;
+}
+.MuiInput-underline {
+  border-bottom:1px solid white !important;
+}
+.MuiInput-underline input{
+  color: white !important;
+}
+.MuiFormLabel-root {
+  color: white !important;
 }

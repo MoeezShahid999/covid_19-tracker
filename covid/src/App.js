@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import Button from "@material-ui/core/Button";
+import { TextField } from "@material-ui/core";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
@@ -25,6 +26,7 @@ export default function PermanentDrawer(props) {
   const [state, setState] = React.useState({
     left: true,
   });
+  const [searchVal, setSeachVal] = React.useState("");
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -36,7 +38,9 @@ export default function PermanentDrawer(props) {
 
     setState({ ...state, [anchor]: open });
   };
-
+  const changeHandler = (e) => {
+    setSeachVal(e.target.value);
+  };
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -47,31 +51,49 @@ export default function PermanentDrawer(props) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <div>
-        {props.data.Countries
-          ? props.data.Countries.map((el) => (
-              <div>
-                <div className="list-item">
-                  <span style={{ color: "red" }} className="list-count">
-                    {el.TotalConfirmed}
-                  </span>{" "}
-                  <span
-                    style={{ marginLeft: "10px", fontSize: "18px" }}
-                    className="list-heading"
+        <TextField
+          id="standard-basic"
+          label="Search Country"
+          className = 'multipart'
+          onChange={changeHandler}
+          value={searchVal}
+          style={{ width: "100%",outline:'white' }}
+        />
+
+        {props.countryData.length
+          ? props.countryData.map((el) => {
+              if (
+                el.country.toLowerCase().indexOf(searchVal.toLowerCase()) !== -1
+              ) {
+                return (
+                  <div
+                    className="list-item-container"
+                    onClick={() => props.countrySelected(el.country)}
                   >
-                    {el.Country}
-                  </span>
-                </div>
-                <div className="list-item">
-                  <span className="list-heading">Deaths: </span>
-                  <span className="list-count">{el.TotalDeaths}</span>
-                </div>
-                <div className="list-item">
-                  <span className="list-heading">Recovered: </span>
-                  <span className="list-count">{el.TotalRecovered}</span>
-                </div>
-                <Divider />
-              </div>
-            ))
+                    <div className="list-item">
+                      <span style={{ color: "rgb(212, 23, 23)" }} className="list-count">
+                        {el.cases}
+                      </span>{" "}
+                      <span
+                        style={{ marginLeft: "10px", fontSize: "18px" }}
+                        className="list-heading"
+                      >
+                        {el.country}
+                      </span>
+                    </div>
+                    <div className="list-item">
+                      <span className="list-heading">Deaths: </span>
+                      <span className="list-count">{el.deaths}</span>
+                    </div>
+                    <div className="list-item">
+                      <span className="list-heading">Recovered: </span>
+                      <span className="list-count">{el.recovered}</span>
+                    </div>
+                    <Divider />
+                  </div>
+                );
+              }
+            })
           : null}
       </div>
     </div>
@@ -81,28 +103,24 @@ export default function PermanentDrawer(props) {
     <div>
       {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-          <Drawer
-            anchor={anchor}
-            open={state[anchor]}
-            variant="permanent"
-
-          >
+          {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
+          <Drawer anchor={anchor} open={state[anchor]} variant="permanent">
             {list(anchor)}
           </Drawer>
         </React.Fragment>
       ))}
       <div style={{ marginLeft: "280px", marginRight: "50px" }}>
         <div>
-          <MainComponent data={props.data} />
+          <MainComponent country={props.country} data={props.totalData} />
         </div>
         <div
           style={{
             marginTop: "50px",
             padding: "20px",
-            backgroundColor: "white",
+            // backgroundColor: "white",
           }}
         >
+          <Divider style = {{marginBottom:'10px'}}/>
           {props.history ? <ReactCharts history={props.history} /> : null}
         </div>
       </div>

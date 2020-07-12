@@ -3,27 +3,49 @@ import App from "./App";
 
 class AppContainer extends React.Component {
   state = {
-    data: {},
+    totalData: {},
+    countryData: {},
+    // history: {},
+    country: null,
   };
-  componentDidMount() {
-    fetch("https://api.covid19api.com/summary", {})
+
+  countrySelected = (country) => {
+    this.setState({
+      country: country,
+      history:null
+    });
+    fetch(
+      `https://corona.lmao.ninja/v2/countries/${country}?yesterday&strict&query`,
+      {}
+    )
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        this.setState({ data: data });
-
+        this.setState({ totalData: data });
       })
       .catch((err) => {
         console.log(err);
       });
-    // fetch("https://covid-193.p.rapidapi.com/statistics", {
-    //   method: "GET",
-    //   headers: {
-    //     "x-rapidapi-host": "covid-193.p.rapidapi.com",
-    //     "x-rapidapi-key": "ad33439eeamsh3ff3820e44b0968p1805aajsn9c10732612e8",
-    //   },
-    // })
+
+    fetch(
+      `https://corona.lmao.ninja/v2/historical/${country}?lastdays=all`,
+      {}
+    )
+      .then((response) => {
+
+        return response.json();
+      })
+      .then((data) => {
+        this.setState({ history: data.timeline });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  componentDidMount() {
+    // fetch("https://api.covid19api.com/summary", {})
     //   .then((response) => {
     //     return response.json();
     //   })
@@ -33,45 +55,56 @@ class AppContainer extends React.Component {
     //   .catch((err) => {
     //     console.log(err);
     //   });
+    if (!this.state.country) {
+      fetch("https://corona.lmao.ninja/v2/all?yesterday", {})
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          this.setState({ totalData: data });
 
-    // fetch(
-    //   "https://covid-19-statistics.p.rapidapi.com/reports/total?date=2020-04-07",
-    //   {
-    //     method: "GET",
-    //     headers: {
-    //       "x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
-    //       "x-rapidapi-key":
-    //         "ad33439eeamsh3ff3820e44b0968p1805aajsn9c10732612e8",
-    //     },
-    //   }
-    // )
-    //   .then((response) => {
-    //     return response.json();
-    //   })
-    //   .then((data) => {
-    //     this.setState(data);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-    fetch("https://corona.lmao.ninja/v2/historical/all?lastdays=all", {})
-      .then((response) => {
-        //   console.log(response)
-        return response.json();
-      })
-      .then((data) => {
-        this.setState({ history: data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      fetch("https://corona.lmao.ninja/v2/countries?yesterday&sort", {})
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          this.setState({ countryData: data });
+
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+
+      fetch("https://corona.lmao.ninja/v2/historical/all?lastdays=all", {})
+        .then((response) => {
+
+          return response.json();
+        })
+        .then((data) => {
+          this.setState({ history: data });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   render() {
-    //   console.log(this.state.data)
+      console.log(this.state)
     return (
       <div className="App">
-        <App data={this.state.data} history={this.state.history} />
+        <App
+          countrySelected={this.countrySelected}
+          country={this.state.country || "Global"}
+          data={this.state.totalData}
+          countryData={this.state.countryData}
+          totalData={this.state.totalData}
+          history={this.state.history}
+        />
       </div>
     );
   }
