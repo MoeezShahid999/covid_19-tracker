@@ -16,6 +16,9 @@
 .list-item-container {
   cursor: pointer !important;
 }
+.list-item-container .MuiDivider-root{
+  margin: 2px 0 !important;
+}
 .list-item-container:hover {
   background-color: rgb(53, 46, 46);
 }
@@ -32,6 +35,7 @@
 }
 .axis-flex {
   display: flex;
+  text-align: center;
 }
 .axis-flex > * {
   flex: 1;
@@ -44,4 +48,39 @@
 }
 .MuiFormLabel-root {
   color: white !important;
+}
+
+
+
+
+
+
+
+
+
+::-webkit-scrollbar {
+  width: 5px;
+  /* border-radius: 10px 0 10px 0; */
+}
+::-webkit-scrollbar:horizontal{
+  /* display: none; */
+  height: 8px;
+}
+
+
+/* Track */
+::-webkit-scrollbar-track {
+  width: 8px;
+  background-color: black;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: brown;
 }

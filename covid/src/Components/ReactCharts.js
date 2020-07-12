@@ -68,7 +68,7 @@ function MyChart(props) {
     // space of its parent element automatically
     <div
       style={{
-        width: "900px",
+        width: "100%",
         height: "500px",
       }}
     >
@@ -113,7 +113,7 @@ function MyChart(props) {
         </div>
       </div>
       <div className = 'axis-flex'>
-        <div>X-Axis: <span>Every Data since 1/22/2020</span></div>
+        <div>X-Axis: <span>Every Day since 1/22/2020</span></div>
         <div>Y-Axis: <span>Corresponding value of each line</span>  </div>
       </div>
     </div>

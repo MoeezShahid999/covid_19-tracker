@@ -57,7 +57,7 @@ export default function PermanentDrawer(props) {
           className = 'multipart'
           onChange={changeHandler}
           value={searchVal}
-          style={{ width: "100%",outline:'white' }}
+          style={{ width: "100%",outline:'white',marginBottom:'20px' }}
         />
 
         {props.countryData.length
@@ -89,7 +89,7 @@ export default function PermanentDrawer(props) {
                       <span className="list-heading">Recovered: </span>
                       <span className="list-count">{el.recovered}</span>
                     </div>
-                    <Divider />
+                    <Divider style = {{background:'#484747',margin:'10px 0'}}/>
                   </div>
                 );
               }
@@ -100,7 +100,7 @@ export default function PermanentDrawer(props) {
   );
 
   return (
-    <div>
+    <div className = {`${props.bg?'content-header':''}`}>
       {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
           {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
@@ -120,7 +120,7 @@ export default function PermanentDrawer(props) {
             // backgroundColor: "white",
           }}
         >
-          <Divider style = {{marginBottom:'10px'}}/>
+          <Divider style = {{marginBottom:'50px'}}/>
           {props.history ? <ReactCharts history={props.history} /> : null}
         </div>
       </div>

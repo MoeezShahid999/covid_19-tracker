@@ -1,5 +1,6 @@
 import React from "react";
 import App from "./App";
+import "./loader.css";
 
 class AppContainer extends React.Component {
   state = {
@@ -7,12 +8,16 @@ class AppContainer extends React.Component {
     countryData: {},
     // history: {},
     country: null,
+    spinner: false,
+    loader: false,
   };
 
   countrySelected = (country) => {
     this.setState({
       country: country,
-      history:null
+      history: null,
+      spinner: true,
+      // loader: true,
     });
     fetch(
       `https://corona.lmao.ninja/v2/countries/${country}?yesterday&strict&query`,
@@ -28,16 +33,12 @@ class AppContainer extends React.Component {
         console.log(err);
       });
 
-    fetch(
-      `https://corona.lmao.ninja/v2/historical/${country}?lastdays=all`,
-      {}
-    )
+    fetch(`https://corona.lmao.ninja/v2/historical/${country}?lastdays=all`, {})
       .then((response) => {
-
         return response.json();
       })
       .then((data) => {
-        this.setState({ history: data.timeline });
+        this.setState({ history: data.timeline, loader: false });
       })
       .catch((err) => {
         console.log(err);
@@ -62,7 +63,6 @@ class AppContainer extends React.Component {
         })
         .then((data) => {
           this.setState({ totalData: data });
-
         })
         .catch((err) => {
           console.log(err);
@@ -73,7 +73,6 @@ class AppContainer extends React.Component {
         })
         .then((data) => {
           this.setState({ countryData: data });
-
         })
         .catch((err) => {
           console.log(err);
@@ -81,7 +80,6 @@ class AppContainer extends React.Component {
 
       fetch("https://corona.lmao.ninja/v2/historical/all?lastdays=all", {})
         .then((response) => {
-
           return response.json();
         })
         .then((data) => {
@@ -94,10 +92,12 @@ class AppContainer extends React.Component {
   }
 
   render() {
-      console.log(this.state)
+    console.log(this.state);
     return (
       <div className="App">
+        {/* {this.state.loader ? <div className="loader">Loading...</div> : null} */}
         <App
+          // bg={this.state.loader}
           countrySelected={this.countrySelected}
           country={this.state.country || "Global"}
           data={this.state.totalData}
